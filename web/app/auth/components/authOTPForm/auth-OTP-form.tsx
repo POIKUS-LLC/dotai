@@ -23,9 +23,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import AuthOTPFormProps from "./auth-OTP-form-props"
 import useOTPForm from "./use-OTP-form"
 
-
-
-
 const getOTPGroups = (otpLength: number): number[] => {
   if (otpLength <= 5) return [otpLength];
   if (otpLength === 6) return [3, 3];
