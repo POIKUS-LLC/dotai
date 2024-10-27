@@ -1,3 +1,5 @@
+"use client"
+
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -52,7 +54,7 @@ const Testimonials = ({ testimonials, cornerRadius }: { testimonials: Testimonia
     };
 
     return (
-        <div 
+        <div
             className="relative w-full h-full overflow-hidden"
             tabIndex={0}
             onKeyDown={handleKeyDown}
@@ -117,7 +119,7 @@ const Testimonials = ({ testimonials, cornerRadius }: { testimonials: Testimonia
             </div>
 
             <AnimatePresence>
-                <motion.div 
+                <motion.div
                     key={currentIndex}
                     className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70"
                     initial={{ height: 0, opacity: 0 }}
@@ -136,7 +138,7 @@ const Testimonials = ({ testimonials, cornerRadius }: { testimonials: Testimonia
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3, delay: 0.2 }}
                     >
-                        <motion.p 
+                        <motion.p
                             className="text-2xl mb-4 italic"
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -145,7 +147,7 @@ const Testimonials = ({ testimonials, cornerRadius }: { testimonials: Testimonia
                         >
                             “{currentTestimonial.testimonial}”
                         </motion.p>
-                        <motion.div 
+                        <motion.div
                             className="flex items-center"
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
