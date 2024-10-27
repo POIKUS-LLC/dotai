@@ -42,7 +42,6 @@ const AuthOTPForm = ({ onVerificationSuccess, otpLength }: AuthOTPFormProps) => 
   return (
     <Form {...form}>
       <form ref={formRef} onSubmit={form.handleSubmit(handleSubmit)} className="w-full space-y-6">
-        <h2 id="otpFormTitle" className="text-lg font-semibold">One-Time Password Verification</h2>
         {error && (
           <Alert variant="destructive">
             <AlertTitle>Error</AlertTitle>
@@ -65,9 +64,12 @@ const AuthOTPForm = ({ onVerificationSuccess, otpLength }: AuthOTPFormProps) => 
                 >
                   {otpGroups.map((groupLength, groupIndex) => (
                     <InputOTPGroup key={groupIndex}>
-                      {[...Array(groupLength)].map((_, index) => (
-                        <InputOTPSlot key={index} index={groupIndex * 4 + index} />
-                      ))}
+                      {[...Array(groupLength)].map((_, index) => {
+                        const slotIndex = otpGroups
+                          .slice(0, groupIndex)
+                          .reduce((sum, len) => sum + len, 0) + index;
+                        return <InputOTPSlot key={index} index={slotIndex} />;
+                      })}
                       {groupIndex < otpGroups.length - 1 && <InputOTPSeparator />}
                     </InputOTPGroup>
                   ))}
