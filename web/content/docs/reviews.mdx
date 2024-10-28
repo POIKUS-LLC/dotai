@@ -1,0 +1,783 @@
+---
+title: Review Components
+description: A composable, animated, and customizable set of components for displaying user reviews.
+component: true
+---
+
+<figure className="flex flex-col gap-4">
+  <ComponentPreview
+    name="review-card-demo"
+    title="Review Components"
+    type="block"
+    description="Composable and animated review card components built with React and Framer Motion."
+    className="w-full"
+  />
+  <figcaption className="text-center text-sm text-gray-500">
+    A set of review components with animations and context-based state
+    management.
+  </figcaption>
+</figure>
+
+Review components are essential for showcasing user feedback, ratings, and testimonials in any application. Building them with composability, theming, and animation in mind ensures a seamless and engaging user experience.
+
+I developed a set of review components that are highly customizable and animated using Framer Motion. These components leverage React's context API for state management, making them both flexible and easy to integrate.
+
+## Installation
+
+To integrate the review components into your project, follow the steps below.
+
+<Steps>
+
+{" "}
+
+<Step>Ensure you have the necessary dependencies installed:</Step>
+```bash npm install react framer-motion lucide-react # or yarn add react
+framer-motion lucide-react ```
+
+{" "}
+
+<Step>
+  Copy the review components into your project structure, typically under
+  `components/ui/reviews`.
+</Step>
+<Step>Import and use the components as needed in your application.</Step>
+
+</Steps>
+
+## Structure
+
+The review component library is composed of the following parts:
+
+- **Contexts**: Manage shared state across review components.
+- **Hooks**: Provide easy access to context values.
+- **Animation Configurations**: Define default animations for components.
+- **Motion Components**: Enhanced components with animation capabilities.
+- **Review Components**: The main components used to build review cards and sections.
+
+<figure className="flex flex-col gap-4">
+  <Image
+    src="/images/review-structure.png"
+    width="716"
+    height="420"
+    alt="Review Components Structure"
+    className="border dark:hidden rounded-lg overflow-hidden mt-6 w-full"
+  />
+  <Image
+    src="/images/review-structure-dark.png"
+    width="716"
+    height="420"
+    alt="Review Components Structure Dark"
+    className="border hidden dark:block rounded-lg overflow-hidden mt-6 w-full"
+  />
+</figure>
+
+## Usage
+
+Here's how to integrate and use the review components in your application.
+
+### Basic Review Section
+
+Start by creating a review section that will contain multiple review cards.
+
+```tsx showLineNumbers title="components/ReviewSectionDemo.tsx"
+import React from "react";
+import {
+  ReviewSection,
+  ReviewSectionHeader,
+  ReviewSectionDescription,
+  ReviewSectionReviews,
+  PKSReviewCard,
+  PKSReviewCardHeader,
+  PKSReviewCardTitle,
+  PKSReviewCardDescription,
+  PKSReviewCardRating,
+  PKSReviewCardAuthor,
+} from "@/components/ui/reviews";
+
+export function ReviewSectionDemo() {
+  return (
+    <ReviewSection>
+      <ReviewSectionHeader>
+        <h2>What Our Customers Say</h2>
+      </ReviewSectionHeader>
+      <ReviewSectionDescription>
+        Hear from users who have experienced the benefits of our product.
+      </ReviewSectionDescription>
+      <ReviewSectionReviews>
+        <PKSReviewCard rating={5}>
+          <PKSReviewCardHeader>
+            <PKSReviewCardTitle>Excellent Service</PKSReviewCardTitle>
+          </PKSReviewCardHeader>
+          <PKSReviewCardDescription>
+            The customer service was outstanding. Highly recommend!
+          </PKSReviewCardDescription>
+          <PKSReviewCardAuthor
+            name="Jane Doe"
+            title="Product Manager"
+            company="TechCorp"
+            avatar="/avatars/jane.jpg"
+          />
+        </PKSReviewCard>
+        {/* Add more PKSReviewCard components as needed */}
+      </ReviewSectionReviews>
+    </ReviewSection>
+  );
+}
+```
+
+### Advanced Review Card with Footer Actions
+
+Enhance your review cards by adding footer actions like buttons or links.
+
+```tsx showLineNumbers title="components/AdvancedReviewCard.tsx"
+import React from "react";
+import {
+  PKSReviewCard,
+  PKSReviewCardHeader,
+  PKSReviewCardTitle,
+  PKSReviewCardDescription,
+  PKSReviewCardRating,
+  PKSReviewCardAuthor,
+  PKSReviewCardFooter,
+  PKSReviewCardFooterActions,
+  PKSReviewCardFooterAction,
+} from "@/components/ui/reviews";
+import { Button } from "@/components/ui/button";
+
+export function AdvancedReviewCard() {
+  return (
+    <PKSReviewCard rating={4}>
+      <PKSReviewCardHeader>
+        <PKSReviewCardTitle>Great Features</PKSReviewCardTitle>
+      </PKSReviewCardHeader>
+      <PKSReviewCardDescription>
+        The features are exactly what I needed and easy to use.
+      </PKSReviewCardDescription>
+      <PKSReviewCardAuthor
+        name="John Smith"
+        title="Developer"
+        company="DevWorks"
+        avatar="/avatars/john.jpg"
+      />
+      <PKSReviewCardFooter>
+        <PKSReviewCardFooterActions>
+          <PKSReviewCardFooterAction variant="primary">
+            Reply
+          </PKSReviewCardFooterAction>
+          <PKSReviewCardFooterAction variant="secondary">
+            Like
+          </PKSReviewCardFooterAction>
+        </PKSReviewCardFooterActions>
+      </PKSReviewCardFooter>
+    </PKSReviewCard>
+  );
+}
+```
+
+## Components
+
+### ReviewSection
+
+The `ReviewSection` component serves as a container for multiple review cards. It handles layout and animation configurations.
+
+#### Props
+
+| Name        | Type                           | Description                                      |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| `animation` | `ReviewSectionAnimationConfig` | Custom animation configurations for the section. |
+
+#### Example
+
+```tsx showLineNumbers title="components/CustomReviewSection.tsx"
+import React from "react";
+import {
+  ReviewSection,
+  ReviewSectionHeader,
+  ReviewSectionReviews,
+  PKSReviewCard,
+} from "@/components/ui/reviews";
+
+export function CustomReviewSection() {
+  return (
+    <ReviewSection animation={{ disabled: false }}>
+      <ReviewSectionHeader>
+        <h2>User Feedback</h2>
+      </ReviewSectionHeader>
+      <ReviewSectionReviews>
+        <PKSReviewCard rating={5}>{/* Review card content */}</PKSReviewCard>
+        {/* More review cards */}
+      </ReviewSectionReviews>
+    </ReviewSection>
+  );
+}
+```
+
+### PKSReviewCard
+
+A card component for displaying individual reviews, including rating, description, and author information.
+
+#### Props
+
+| Name        | Type              | Description                                |
+| ----------- | ----------------- | ------------------------------------------ |
+| `rating`    | `number`          | The rating value for the review (e.g., 4). |
+| `maxRating` | `number`          | The maximum rating value (default is 5).   |
+| `children`  | `React.ReactNode` | The content of the review card.            |
+| `className` | `string`          | Additional CSS classes for styling.        |
+
+#### Example
+
+```tsx showLineNumbers title="components/SimpleReviewCard.tsx"
+import React from "react";
+import {
+  PKSReviewCard,
+  PKSReviewCardHeader,
+  PKSReviewCardTitle,
+  PKSReviewCardDescription,
+  PKSReviewCardAuthor,
+} from "@/components/ui/reviews";
+
+export function SimpleReviewCard() {
+  return (
+    <PKSReviewCard rating={5}>
+      <PKSReviewCardHeader>
+        <PKSReviewCardTitle>Outstanding Experience</PKSReviewCardTitle>
+      </PKSReviewCardHeader>
+      <PKSReviewCardDescription>
+        I had an outstanding experience with the support team. Highly
+        recommended!
+      </PKSReviewCardDescription>
+      <PKSReviewCardAuthor
+        name="Alice Johnson"
+        title="Designer"
+        company="CreativeStudio"
+        avatar="/avatars/alice.jpg"
+      />
+    </PKSReviewCard>
+  );
+}
+```
+
+### PKSReviewCardHeader
+
+The header section of the review card, typically containing the title and rating.
+
+#### Props
+
+| Name        | Type              | Description                |
+| ----------- | ----------------- | -------------------------- |
+| `children`  | `React.ReactNode` | The content of the header. |
+| `className` | `string`          | Additional CSS classes.    |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewCardHeader.tsx"
+import React from "react";
+import {
+  PKSReviewCardHeader,
+  PKSReviewCardTitle,
+  PKSReviewCardRating,
+} from "@/components/ui/reviews";
+
+export function ReviewCardHeaderExample() {
+  return (
+    <PKSReviewCardHeader>
+      <PKSReviewCardTitle>Great Support</PKSReviewCardTitle>
+      <PKSReviewCardRating rating={5} />
+    </PKSReviewCardHeader>
+  );
+}
+```
+
+### PKSReviewCardTitle
+
+The title component within the review card header.
+
+#### Props
+
+| Name        | Type              | Description             |
+| ----------- | ----------------- | ----------------------- |
+| `children`  | `React.ReactNode` | The title text.         |
+| `className` | `string`          | Additional CSS classes. |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewCardTitle.tsx"
+import React from "react";
+import { PKSReviewCardTitle } from "@/components/ui/reviews";
+
+export function ReviewCardTitleExample() {
+  return <PKSReviewCardTitle>Exceptional Quality</PKSReviewCardTitle>;
+}
+```
+
+### PKSReviewCardDescription
+
+The description or body text of the review.
+
+#### Props
+
+| Name        | Type              | Description             |
+| ----------- | ----------------- | ----------------------- |
+| `children`  | `React.ReactNode` | The description text.   |
+| `className` | `string`          | Additional CSS classes. |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewCardDescription.tsx"
+import React from "react";
+import { PKSReviewCardDescription } from "@/components/ui/reviews";
+
+export function ReviewCardDescriptionExample() {
+  return (
+    <PKSReviewCardDescription>
+      The product exceeded my expectations in every way. Fantastic user
+      experience!
+    </PKSReviewCardDescription>
+  );
+}
+```
+
+### PKSReviewCardRating
+
+Displays the star rating for the review.
+
+#### Props
+
+| Name        | Type     | Description             |
+| ----------- | -------- | ----------------------- |
+| `className` | `string` | Additional CSS classes. |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewCardRating.tsx"
+import React from "react";
+import { PKSReviewCardRating } from "@/components/ui/reviews";
+
+export function ReviewCardRatingExample() {
+  return <PKSReviewCardRating rating={4} maxRating={5} />;
+}
+```
+
+### PKSReviewCardAuthor
+
+Displays author information, including name, title, company, and avatar.
+
+#### Props
+
+| Name                  | Type                                                                        | Description                                |
+| --------------------- | --------------------------------------------------------------------------- | ------------------------------------------ |
+| `name`                | `string`                                                                    | The author's name.                         |
+| `title`               | `string`                                                                    | The author's title or position.            |
+| `company`             | `string`                                                                    | The company the author is associated with. |
+| `avatar`              | `string`                                                                    | URL to the author's avatar image.          |
+| `companyUrl`          | `string`                                                                    | URL to the company's website.              |
+| `companyLogo`         | `ImageProps & { src: string; alt: string; width: number; height: number; }` | Logo image details for the company.        |
+| `containerClassNames` | `object`                                                                    | Custom class names for various containers. |
+| `className`           | `string`                                                                    | Additional CSS classes.                    |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewCardAuthor.tsx"
+import React from "react";
+import { PKSReviewCardAuthor } from "@/components/ui/reviews";
+
+export function ReviewCardAuthorExample() {
+  return (
+    <PKSReviewCardAuthor
+      name="Michael Brown"
+      title="CEO"
+      company="InnovateX"
+      avatar="/avatars/michael.jpg"
+      companyUrl="https://innovatex.com"
+      companyLogo={{
+        src: "/logos/innovatex.png",
+        alt: "InnovateX Logo",
+        width: 40,
+        height: 40,
+      }}
+    />
+  );
+}
+```
+
+### PKSReviewCardFooter
+
+The footer section of the review card, typically containing actions like buttons.
+
+#### Props
+
+| Name        | Type              | Description                |
+| ----------- | ----------------- | -------------------------- |
+| `children`  | `React.ReactNode` | The content of the footer. |
+| `className` | `string`          | Additional CSS classes.    |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewCardFooter.tsx"
+import React from "react";
+import {
+  PKSReviewCardFooter,
+  PKSReviewCardFooterActions,
+  PKSReviewCardFooterAction,
+} from "@/components/ui/reviews";
+import { Button } from "@/components/ui/button";
+
+export function ReviewCardFooterExample() {
+  return (
+    <PKSReviewCardFooter>
+      <PKSReviewCardFooterActions>
+        <PKSReviewCardFooterAction variant="primary">
+          Reply
+        </PKSReviewCardFooterAction>
+        <PKSReviewCardFooterAction variant="secondary">
+          Like
+        </PKSReviewCardFooterAction>
+      </PKSReviewCardFooterActions>
+    </PKSReviewCardFooter>
+  );
+}
+```
+
+### ReviewSectionHeader
+
+The header component for the `ReviewSection`, typically containing a title.
+
+#### Props
+
+| Name           | Type              | Description                                    |
+| -------------- | ----------------- | ---------------------------------------------- | ---- | ---- | ---- | ----- | ------------------------------------- |
+| `useDivider`   | `boolean`         | Whether to include a divider below the header. |
+| `headingLevel` | `"h1"             | "h2"                                           | "h3" | "h4" | "h5" | "h6"` | The HTML heading level for the title. |
+| `children`     | `React.ReactNode` | The header content, typically a title.         |
+| `className`    | `string`          | Additional CSS classes.                        |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewSectionHeaderExample.tsx"
+import React from "react";
+import { ReviewSectionHeader } from "@/components/ui/reviews";
+
+export function ReviewSectionHeaderExample() {
+  return (
+    <ReviewSectionHeader useDivider headingLevel="h2">
+      Customer Testimonials
+    </ReviewSectionHeader>
+  );
+}
+```
+
+### ReviewSectionDescription
+
+Provides a description or subtitle for the `ReviewSection`.
+
+#### Props
+
+| Name         | Type              | Description                                         |
+| ------------ | ----------------- | --------------------------------------------------- |
+| `useDivider` | `boolean`         | Whether to include a divider below the description. |
+| `children`   | `React.ReactNode` | The description content.                            |
+| `className`  | `string`          | Additional CSS classes.                             |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewSectionDescriptionExample.tsx"
+import React from "react";
+import { ReviewSectionDescription } from "@/components/ui/reviews";
+
+export function ReviewSectionDescriptionExample() {
+  return (
+    <ReviewSectionDescription useDivider>
+      See what our users are saying about our product and services.
+    </ReviewSectionDescription>
+  );
+}
+```
+
+### ReviewSectionReviews
+
+A container for organizing and displaying multiple review cards with animation support.
+
+#### Props
+
+| Name         | Type                                  | Description                                      |
+| ------------ | ------------------------------------- | ------------------------------------------------ |
+| `animation`  | `ReviewSectionReviewsAnimationConfig` | Custom animation configurations for the reviews. |
+| `useDivider` | `boolean`                             | Whether to include a divider below the reviews.  |
+| `children`   | `React.ReactNode`                     | The review cards to display.                     |
+| `className`  | `string`                              | Additional CSS classes.                          |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewSectionReviewsExample.tsx"
+import React from "react";
+import { ReviewSectionReviews, PKSReviewCard } from "@/components/ui/reviews";
+
+export function ReviewSectionReviewsExample() {
+  return (
+    <ReviewSectionReviews>
+      <PKSReviewCard rating={5}>{/* Review card content */}</PKSReviewCard>
+      <PKSReviewCard rating={4}>{/* Review card content */}</PKSReviewCard>
+      {/* More review cards */}
+    </ReviewSectionReviews>
+  );
+}
+```
+
+### ReviewSectionFooter
+
+Adds a footer to the `ReviewSection`, useful for actions like "View All Reviews."
+
+#### Props
+
+| Name         | Type              | Description                                    |
+| ------------ | ----------------- | ---------------------------------------------- |
+| `useDivider` | `boolean`         | Whether to include a divider above the footer. |
+| `children`   | `React.ReactNode` | The footer content.                            |
+| `className`  | `string`          | Additional CSS classes.                        |
+
+#### Example
+
+```tsx showLineNumbers title="components/ReviewSectionFooterExample.tsx"
+import React from "react";
+import { ReviewSectionFooter, Button } from "@/components/ui/reviews";
+
+export function ReviewSectionFooterExample() {
+  return (
+    <ReviewSectionFooter useDivider>
+      <Button variant="link">View All Reviews</Button>
+    </ReviewSectionFooter>
+  );
+}
+```
+
+
+### Hooks
+
+#### useReviewCard
+
+Accesses the `ReviewCard` context. Must be used within a `PKSReviewCard`.
+
+##### Usage
+
+```tsx showLineNumbers
+import { useReviewCard } from "@/components/ui/reviews";
+
+function CustomComponent() {
+  const { rating, maxRating, isWithinFooter } = useReviewCard();
+
+  return (
+    <div>
+      Rating: {rating} / {maxRating}
+    </div>
+  );
+}
+```
+
+#### useReviewSection
+
+Accesses the `ReviewSection` context. Must be used within a `ReviewSection`.
+
+##### Usage
+
+```tsx showLineNumbers
+import { useReviewSection } from "@/components/ui/reviews";
+
+function CustomSectionComponent() {
+  const { hasFooter } = useReviewSection();
+
+  return hasFooter ? <div>Footer is present</div> : null;
+}
+```
+
+#### useReviewSectionReviews
+
+Accesses the `ReviewSectionReviews` context. Must be used within a `ReviewSectionReviews`.
+
+##### Usage
+
+```tsx showLineNumbers
+import { useReviewSectionReviews } from "@/components/ui/reviews";
+
+function CustomReviewsComponent() {
+  const { isWithinReviewSectionReviews } = useReviewSectionReviews();
+
+  return isWithinReviewSectionReviews ? <div>Inside Reviews</div> : null;
+}
+```
+
+## Animation Configurations
+
+### ReviewSectionAnimationConfig
+
+Defines animation settings for the `ReviewSection`.
+
+```typescript
+interface ReviewSectionAnimationConfig {
+  container?: Variants;
+  header?: Variants;
+  description?: Variants;
+  content?: Variants;
+  disabled?: boolean;
+  viewport?: {
+    once?: boolean;
+    margin?: string;
+  };
+  staggerDelay?: number;
+  initialDelay?: number;
+}
+```
+
+### ReviewSectionReviewsAnimationConfig
+
+Defines animation settings for the `ReviewSectionReviews`.
+
+```typescript
+interface ReviewSectionReviewsAnimationConfig {
+  container?: Variants;
+  item?: Variants;
+  disabled?: boolean;
+  viewport?: {
+    once?: boolean;
+    margin?: string;
+  };
+  staggerDelay?: number;
+  initialDelay?: number;
+}
+```
+
+## Theming
+
+The review components are designed to be themeable using CSS variables. Customize the appearance by overriding these variables in your CSS.
+
+```css title="app/globals.css"
+@layer base {
+  :root {
+    --review-background: 255 255% 100%;
+    --review-foreground: 240 5% 20%;
+    --review-primary: 240 5% 10%;
+    --review-primary-foreground: 0 0% 98%;
+    --review-accent: 240 4% 95%;
+    --review-accent-foreground: 240 5% 10%;
+    --review-border: 220 13% 90%;
+    --review-ring: 217.2 91% 60%;
+  }
+
+  .dark {
+    --review-background: 240 5% 10%;
+    --review-foreground: 240 4% 95%;
+    --review-primary: 224.3 76% 48%;
+    --review-primary-foreground: 0 0% 100%;
+    --review-accent: 240 3% 15%;
+    --review-accent-foreground: 240 4% 95%;
+    --review-border: 240 3% 15%;
+    --review-ring: 217.2 91% 60%;
+  }
+}
+```
+
+**Note:** Adjusting these variables will change the appearance of the review components across your application, allowing for consistent theming.
+
+## Styling
+
+Customize the review components further using utility classes or by extending their styles.
+
+- **Conditional Styling Based on Context:**
+
+  You can style components based on their context states using data attributes.
+
+  ```tsx
+  <PKSReviewCard className="data-[isWithinFooter=true]:bg-gray-100">
+    {/* Review card content */}
+  </PKSReviewCard>
+  ```
+
+- **Using Utility Classes:**
+
+  Apply Tailwind CSS or other utility classes to modify the layout and appearance.
+
+  ```tsx
+  <PKSReviewCard className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+    {/* Review card content */}
+  </PKSReviewCard>
+  ```
+
+## Advanced Customization
+
+### Custom Animation Configurations
+
+Override default animations by providing custom configurations to `ReviewSection` and `ReviewSectionReviews`.
+
+```tsx showLineNumbers title="components/CustomAnimatedReviewSection.tsx"
+import React from "react";
+import {
+  ReviewSection,
+  ReviewSectionHeader,
+  ReviewSectionReviews,
+  PKSReviewCard,
+} from "@/components/ui/reviews";
+
+const customAnimationConfig = {
+  container: {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 1 } },
+  },
+  header: {
+    initial: { x: -100 },
+    animate: { x: 0, transition: { type: "spring", stiffness: 50 } },
+  },
+};
+
+export function CustomAnimatedReviewSection() {
+  return (
+    <ReviewSection animation={customAnimationConfig}>
+      <ReviewSectionHeader>
+        <h2>Customer Reviews</h2>
+      </ReviewSectionHeader>
+      <ReviewSectionReviews>
+        <PKSReviewCard rating={5}>{/* Review card content */}</PKSReviewCard>
+        {/* More review cards */}
+      </ReviewSectionReviews>
+    </ReviewSection>
+  );
+}
+```
+
+### Integrating with State Management Libraries
+
+Use state management libraries like Redux or Zustand in conjunction with the review components for more complex state scenarios.
+
+```tsx showLineNumbers title="components/ReduxReviewSection.tsx"
+import React from "react";
+import { useSelector } from "react-redux";
+import {
+  ReviewSection,
+  ReviewSectionReviews,
+  PKSReviewCard,
+} from "@/components/ui/reviews";
+
+export function ReduxReviewSection() {
+  const reviews = useSelector((state) => state.reviews.list);
+
+  return (
+    <ReviewSection>
+      <ReviewSectionReviews>
+        {reviews.map((review) => (
+          <PKSReviewCard key={review.id} rating={review.rating}>
+            {/* Review card content */}
+          </PKSReviewCard>
+        ))}
+      </ReviewSectionReviews>
+    </ReviewSection>
+  );
+}
+```
+
+## Changelog
+
+### Initial Release
+
+- Added `PKSReviewCard` and related components.
+- Implemented context-based state management for review cards.
+- Integrated Framer Motion for animations.
+- Provided comprehensive documentation with usage examples.
