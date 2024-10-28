@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation"
 
-const DEBUG = process.env.NEXT_PUBLIC_DEBUG === "true" || process.env.NODE_ENV === "development"
+const DEBUG =
+  process.env.NEXT_PUBLIC_DEBUG === "true" ||
+  process.env.NODE_ENV === "development"
 
 export default function DemoLayout({
   children,
@@ -11,10 +13,5 @@ export default function DemoLayout({
     redirect("/")
   }
 
-  return (
-    <div className="container mx-auto py-8">
-      {children}
-    </div>
-  )
+  return <div className="container mx-auto py-8">{children}</div>
 }
-

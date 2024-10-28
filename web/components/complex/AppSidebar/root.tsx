@@ -1,8 +1,10 @@
+import { ChevronDown } from "lucide-react"
+
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/components/ui/collapsible"
 import {
   Sidebar,
   SidebarContent,
@@ -18,10 +20,10 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { ChevronDown } from "lucide-react";
-import SidebarMenuConfiguration from "./SidebarMenuItem";
-import AppSidebarHeader from "./header";
+} from "@/components/ui/sidebar"
+
+import AppSidebarHeader from "./header"
+import SidebarMenuConfiguration from "./SidebarMenuItem"
 
 const renderMenuItem = (item: SidebarMenuConfiguration) => {
   if (item.children) {
@@ -51,7 +53,7 @@ const renderMenuItem = (item: SidebarMenuConfiguration) => {
           </SidebarMenuSub>
         </CollapsibleContent>
       </Collapsible>
-    );
+    )
   }
 
   return (
@@ -63,8 +65,8 @@ const renderMenuItem = (item: SidebarMenuConfiguration) => {
         </a>
       </SidebarMenuButton>
     </SidebarMenuItem>
-  );
-};
+  )
+}
 
 function AppSidebar({
   items,
@@ -86,8 +88,8 @@ function AppSidebar({
         <SidebarTrigger />
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }
-export default AppSidebar;
+export default AppSidebar
 
-AppSidebar.displayName = "AppSidebar";
+AppSidebar.displayName = "AppSidebar"

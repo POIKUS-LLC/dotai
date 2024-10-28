@@ -53,7 +53,7 @@ body {
     --review-border: 0 0% 89.8%;
     --review-muted: 0 0% 96.1%;
     --review-muted-foreground: 0 0% 45.1%;
-    --review-rating-active: 45 93% 47%;  
+    --review-rating-active: 45 93% 47%;
     --review-rating-inactive: 0 0% 96.1%;
   }
   .dark {
@@ -95,7 +95,7 @@ body {
     --review-border: 0 0% 14.9%;
     --review-muted: 0 0% 14.9%;
     --review-muted-foreground: 0 0% 63.9%;
-    --review-rating-active: 45 93% 47%;  /* amber-400 equivalent */
+    --review-rating-active: 45 93% 47%; /* amber-400 equivalent */
     --review-rating-inactive: 0 0% 14.9%;
   }
 }

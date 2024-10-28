@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from "zod"
 
 const authFormSchema = z.object({
-    email: z.string().email(),
-    rememberMe: z.boolean().optional(),
-});
+  email: z.string().email(),
+  rememberMe: z.boolean().optional(),
+})
 
-export { authFormSchema };
+export { authFormSchema }

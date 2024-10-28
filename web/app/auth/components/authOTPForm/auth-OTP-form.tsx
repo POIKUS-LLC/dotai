@@ -1,8 +1,9 @@
 "use client"
 
-import { useRef, useMemo } from "react"
-import { Loader2 } from 'lucide-react'
+import { useMemo, useRef } from "react"
+import { Loader2 } from "lucide-react"
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -16,32 +17,42 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSlot,
   InputOTPSeparator,
+  InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+
 import AuthOTPFormProps from "./auth-OTP-form-props"
 import useOTPForm from "./use-OTP-form"
 
 const getOTPGroups = (otpLength: number): number[] => {
-  if (otpLength <= 5) return [otpLength];
-  if (otpLength === 6) return [3, 3];
-  if (otpLength === 7) return [2, 3, 2];
-  if (otpLength === 8) return [4, 4];
-  if (otpLength === 9) return [3, 3, 3];
-  if (otpLength <= 12) return [3, 3, 3, otpLength - 9];
-  return [4, 4, 4, otpLength - 12];
+  if (otpLength <= 5) return [otpLength]
+  if (otpLength === 6) return [3, 3]
+  if (otpLength === 7) return [2, 3, 2]
+  if (otpLength === 8) return [4, 4]
+  if (otpLength === 9) return [3, 3, 3]
+  if (otpLength <= 12) return [3, 3, 3, otpLength - 9]
+  return [4, 4, 4, otpLength - 12]
 }
 
-const AuthOTPForm = ({ onVerificationSuccess, otpLength }: AuthOTPFormProps) => {
-  const { form, isLoading, error, handleSubmit } = useOTPForm(onVerificationSuccess, otpLength)
+const AuthOTPForm = ({
+  onVerificationSuccess,
+  otpLength,
+}: AuthOTPFormProps) => {
+  const { form, isLoading, error, handleSubmit } = useOTPForm(
+    onVerificationSuccess,
+    otpLength
+  )
   const formRef = useRef<HTMLFormElement>(null)
 
-  const otpGroups = useMemo(() => getOTPGroups(otpLength), [otpLength]);
+  const otpGroups = useMemo(() => getOTPGroups(otpLength), [otpLength])
 
   return (
     <Form {...form}>
-      <form ref={formRef} onSubmit={form.handleSubmit(handleSubmit)} className="w-full space-y-6">
+      <form
+        ref={formRef}
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="w-full space-y-6"
+      >
         {error && (
           <Alert variant="destructive">
             <AlertTitle>Error</AlertTitle>
@@ -65,18 +76,22 @@ const AuthOTPForm = ({ onVerificationSuccess, otpLength }: AuthOTPFormProps) => 
                   {otpGroups.map((groupLength, groupIndex) => (
                     <InputOTPGroup key={groupIndex}>
                       {[...Array(groupLength)].map((_, index) => {
-                        const slotIndex = otpGroups
-                          .slice(0, groupIndex)
-                          .reduce((sum, len) => sum + len, 0) + index;
-                        return <InputOTPSlot key={index} index={slotIndex} />;
+                        const slotIndex =
+                          otpGroups
+                            .slice(0, groupIndex)
+                            .reduce((sum, len) => sum + len, 0) + index
+                        return <InputOTPSlot key={index} index={slotIndex} />
                       })}
-                      {groupIndex < otpGroups.length - 1 && <InputOTPSeparator />}
+                      {groupIndex < otpGroups.length - 1 && (
+                        <InputOTPSeparator />
+                      )}
                     </InputOTPGroup>
                   ))}
                 </InputOTP>
               </FormControl>
               <FormDescription id="otpDescription">
-                Please enter the {otpLength}-digit one-time password sent to your phone.
+                Please enter the {otpLength}-digit one-time password sent to
+                your phone.
               </FormDescription>
               <FormMessage id="otpErrorMessage" aria-live="polite" />
             </FormItem>
@@ -99,6 +114,6 @@ const AuthOTPForm = ({ onVerificationSuccess, otpLength }: AuthOTPFormProps) => 
   )
 }
 
-export default AuthOTPForm;
+export default AuthOTPForm
 
-AuthOTPForm.displayName = "AuthOTPForm";
+AuthOTPForm.displayName = "AuthOTPForm"

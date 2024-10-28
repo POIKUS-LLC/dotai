@@ -1,7 +1,6 @@
-
 interface AuthOTPFormProps {
-    onVerificationSuccess: () => void;
-    otpLength: number;
+  onVerificationSuccess: () => void
+  otpLength: number
 }
 
-export default AuthOTPFormProps;
+export default AuthOTPFormProps

@@ -80,19 +80,20 @@ Here's how to integrate and use the review components in your application.
 Start by creating a review section that will contain multiple review cards.
 
 ```tsx showLineNumbers title="components/ReviewSectionDemo.tsx"
-import React from "react";
+import React from "react"
+
 import {
-  ReviewSection,
-  ReviewSectionHeader,
-  ReviewSectionDescription,
-  ReviewSectionReviews,
   PKSReviewCard,
-  PKSReviewCardHeader,
-  PKSReviewCardTitle,
-  PKSReviewCardDescription,
-  PKSReviewCardRating,
   PKSReviewCardAuthor,
-} from "@/components/ui/reviews";
+  PKSReviewCardDescription,
+  PKSReviewCardHeader,
+  PKSReviewCardRating,
+  PKSReviewCardTitle,
+  ReviewSection,
+  ReviewSectionDescription,
+  ReviewSectionHeader,
+  ReviewSectionReviews,
+} from "@/components/ui/reviews"
 
 export function ReviewSectionDemo() {
   return (
@@ -121,7 +122,7 @@ export function ReviewSectionDemo() {
         {/* Add more PKSReviewCard components as needed */}
       </ReviewSectionReviews>
     </ReviewSection>
-  );
+  )
 }
 ```
 
@@ -130,19 +131,20 @@ export function ReviewSectionDemo() {
 Enhance your review cards by adding footer actions like buttons or links.
 
 ```tsx showLineNumbers title="components/AdvancedReviewCard.tsx"
-import React from "react";
+import React from "react"
+
+import { Button } from "@/components/ui/button"
 import {
   PKSReviewCard,
-  PKSReviewCardHeader,
-  PKSReviewCardTitle,
-  PKSReviewCardDescription,
-  PKSReviewCardRating,
   PKSReviewCardAuthor,
+  PKSReviewCardDescription,
   PKSReviewCardFooter,
-  PKSReviewCardFooterActions,
   PKSReviewCardFooterAction,
-} from "@/components/ui/reviews";
-import { Button } from "@/components/ui/button";
+  PKSReviewCardFooterActions,
+  PKSReviewCardHeader,
+  PKSReviewCardRating,
+  PKSReviewCardTitle,
+} from "@/components/ui/reviews"
 
 export function AdvancedReviewCard() {
   return (
@@ -170,7 +172,7 @@ export function AdvancedReviewCard() {
         </PKSReviewCardFooterActions>
       </PKSReviewCardFooter>
     </PKSReviewCard>
-  );
+  )
 }
 ```
 
@@ -189,13 +191,14 @@ The `ReviewSection` component serves as a container for multiple review cards. I
 #### Example
 
 ```tsx showLineNumbers title="components/CustomReviewSection.tsx"
-import React from "react";
+import React from "react"
+
 import {
+  PKSReviewCard,
   ReviewSection,
   ReviewSectionHeader,
   ReviewSectionReviews,
-  PKSReviewCard,
-} from "@/components/ui/reviews";
+} from "@/components/ui/reviews"
 
 export function CustomReviewSection() {
   return (
@@ -208,7 +211,7 @@ export function CustomReviewSection() {
         {/* More review cards */}
       </ReviewSectionReviews>
     </ReviewSection>
-  );
+  )
 }
 ```
 
@@ -228,14 +231,15 @@ A card component for displaying individual reviews, including rating, descriptio
 #### Example
 
 ```tsx showLineNumbers title="components/SimpleReviewCard.tsx"
-import React from "react";
+import React from "react"
+
 import {
   PKSReviewCard,
+  PKSReviewCardAuthor,
+  PKSReviewCardDescription,
   PKSReviewCardHeader,
   PKSReviewCardTitle,
-  PKSReviewCardDescription,
-  PKSReviewCardAuthor,
-} from "@/components/ui/reviews";
+} from "@/components/ui/reviews"
 
 export function SimpleReviewCard() {
   return (
@@ -254,7 +258,7 @@ export function SimpleReviewCard() {
         avatar="/avatars/alice.jpg"
       />
     </PKSReviewCard>
-  );
+  )
 }
 ```
 
@@ -272,12 +276,13 @@ The header section of the review card, typically containing the title and rating
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewCardHeader.tsx"
-import React from "react";
+import React from "react"
+
 import {
   PKSReviewCardHeader,
-  PKSReviewCardTitle,
   PKSReviewCardRating,
-} from "@/components/ui/reviews";
+  PKSReviewCardTitle,
+} from "@/components/ui/reviews"
 
 export function ReviewCardHeaderExample() {
   return (
@@ -285,7 +290,7 @@ export function ReviewCardHeaderExample() {
       <PKSReviewCardTitle>Great Support</PKSReviewCardTitle>
       <PKSReviewCardRating rating={5} />
     </PKSReviewCardHeader>
-  );
+  )
 }
 ```
 
@@ -303,11 +308,12 @@ The title component within the review card header.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewCardTitle.tsx"
-import React from "react";
-import { PKSReviewCardTitle } from "@/components/ui/reviews";
+import React from "react"
+
+import { PKSReviewCardTitle } from "@/components/ui/reviews"
 
 export function ReviewCardTitleExample() {
-  return <PKSReviewCardTitle>Exceptional Quality</PKSReviewCardTitle>;
+  return <PKSReviewCardTitle>Exceptional Quality</PKSReviewCardTitle>
 }
 ```
 
@@ -325,8 +331,9 @@ The description or body text of the review.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewCardDescription.tsx"
-import React from "react";
-import { PKSReviewCardDescription } from "@/components/ui/reviews";
+import React from "react"
+
+import { PKSReviewCardDescription } from "@/components/ui/reviews"
 
 export function ReviewCardDescriptionExample() {
   return (
@@ -334,7 +341,7 @@ export function ReviewCardDescriptionExample() {
       The product exceeded my expectations in every way. Fantastic user
       experience!
     </PKSReviewCardDescription>
-  );
+  )
 }
 ```
 
@@ -351,11 +358,12 @@ Displays the star rating for the review.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewCardRating.tsx"
-import React from "react";
-import { PKSReviewCardRating } from "@/components/ui/reviews";
+import React from "react"
+
+import { PKSReviewCardRating } from "@/components/ui/reviews"
 
 export function ReviewCardRatingExample() {
-  return <PKSReviewCardRating rating={4} maxRating={5} />;
+  return <PKSReviewCardRating rating={4} maxRating={5} />
 }
 ```
 
@@ -379,8 +387,9 @@ Displays author information, including name, title, company, and avatar.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewCardAuthor.tsx"
-import React from "react";
-import { PKSReviewCardAuthor } from "@/components/ui/reviews";
+import React from "react"
+
+import { PKSReviewCardAuthor } from "@/components/ui/reviews"
 
 export function ReviewCardAuthorExample() {
   return (
@@ -397,7 +406,7 @@ export function ReviewCardAuthorExample() {
         height: 40,
       }}
     />
-  );
+  )
 }
 ```
 
@@ -415,13 +424,14 @@ The footer section of the review card, typically containing actions like buttons
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewCardFooter.tsx"
-import React from "react";
+import React from "react"
+
+import { Button } from "@/components/ui/button"
 import {
   PKSReviewCardFooter,
-  PKSReviewCardFooterActions,
   PKSReviewCardFooterAction,
-} from "@/components/ui/reviews";
-import { Button } from "@/components/ui/button";
+  PKSReviewCardFooterActions,
+} from "@/components/ui/reviews"
 
 export function ReviewCardFooterExample() {
   return (
@@ -435,7 +445,7 @@ export function ReviewCardFooterExample() {
         </PKSReviewCardFooterAction>
       </PKSReviewCardFooterActions>
     </PKSReviewCardFooter>
-  );
+  )
 }
 ```
 
@@ -455,15 +465,16 @@ The header component for the `ReviewSection`, typically containing a title.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewSectionHeaderExample.tsx"
-import React from "react";
-import { ReviewSectionHeader } from "@/components/ui/reviews";
+import React from "react"
+
+import { ReviewSectionHeader } from "@/components/ui/reviews"
 
 export function ReviewSectionHeaderExample() {
   return (
     <ReviewSectionHeader useDivider headingLevel="h2">
       Customer Testimonials
     </ReviewSectionHeader>
-  );
+  )
 }
 ```
 
@@ -482,15 +493,16 @@ Provides a description or subtitle for the `ReviewSection`.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewSectionDescriptionExample.tsx"
-import React from "react";
-import { ReviewSectionDescription } from "@/components/ui/reviews";
+import React from "react"
+
+import { ReviewSectionDescription } from "@/components/ui/reviews"
 
 export function ReviewSectionDescriptionExample() {
   return (
     <ReviewSectionDescription useDivider>
       See what our users are saying about our product and services.
     </ReviewSectionDescription>
-  );
+  )
 }
 ```
 
@@ -510,8 +522,9 @@ A container for organizing and displaying multiple review cards with animation s
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewSectionReviewsExample.tsx"
-import React from "react";
-import { ReviewSectionReviews, PKSReviewCard } from "@/components/ui/reviews";
+import React from "react"
+
+import { PKSReviewCard, ReviewSectionReviews } from "@/components/ui/reviews"
 
 export function ReviewSectionReviewsExample() {
   return (
@@ -520,7 +533,7 @@ export function ReviewSectionReviewsExample() {
       <PKSReviewCard rating={4}>{/* Review card content */}</PKSReviewCard>
       {/* More review cards */}
     </ReviewSectionReviews>
-  );
+  )
 }
 ```
 
@@ -539,18 +552,18 @@ Adds a footer to the `ReviewSection`, useful for actions like "View All Reviews.
 #### Example
 
 ```tsx showLineNumbers title="components/ReviewSectionFooterExample.tsx"
-import React from "react";
-import { ReviewSectionFooter, Button } from "@/components/ui/reviews";
+import React from "react"
+
+import { Button, ReviewSectionFooter } from "@/components/ui/reviews"
 
 export function ReviewSectionFooterExample() {
   return (
     <ReviewSectionFooter useDivider>
       <Button variant="link">View All Reviews</Button>
     </ReviewSectionFooter>
-  );
+  )
 }
 ```
-
 
 ### Hooks
 
@@ -561,16 +574,16 @@ Accesses the `ReviewCard` context. Must be used within a `PKSReviewCard`.
 ##### Usage
 
 ```tsx showLineNumbers
-import { useReviewCard } from "@/components/ui/reviews";
+import { useReviewCard } from "@/components/ui/reviews"
 
 function CustomComponent() {
-  const { rating, maxRating, isWithinFooter } = useReviewCard();
+  const { rating, maxRating, isWithinFooter } = useReviewCard()
 
   return (
     <div>
       Rating: {rating} / {maxRating}
     </div>
-  );
+  )
 }
 ```
 
@@ -581,12 +594,12 @@ Accesses the `ReviewSection` context. Must be used within a `ReviewSection`.
 ##### Usage
 
 ```tsx showLineNumbers
-import { useReviewSection } from "@/components/ui/reviews";
+import { useReviewSection } from "@/components/ui/reviews"
 
 function CustomSectionComponent() {
-  const { hasFooter } = useReviewSection();
+  const { hasFooter } = useReviewSection()
 
-  return hasFooter ? <div>Footer is present</div> : null;
+  return hasFooter ? <div>Footer is present</div> : null
 }
 ```
 
@@ -597,12 +610,12 @@ Accesses the `ReviewSectionReviews` context. Must be used within a `ReviewSectio
 ##### Usage
 
 ```tsx showLineNumbers
-import { useReviewSectionReviews } from "@/components/ui/reviews";
+import { useReviewSectionReviews } from "@/components/ui/reviews"
 
 function CustomReviewsComponent() {
-  const { isWithinReviewSectionReviews } = useReviewSectionReviews();
+  const { isWithinReviewSectionReviews } = useReviewSectionReviews()
 
-  return isWithinReviewSectionReviews ? <div>Inside Reviews</div> : null;
+  return isWithinReviewSectionReviews ? <div>Inside Reviews</div> : null
 }
 ```
 
@@ -614,17 +627,17 @@ Defines animation settings for the `ReviewSection`.
 
 ```typescript
 interface ReviewSectionAnimationConfig {
-  container?: Variants;
-  header?: Variants;
-  description?: Variants;
-  content?: Variants;
-  disabled?: boolean;
+  container?: Variants
+  header?: Variants
+  description?: Variants
+  content?: Variants
+  disabled?: boolean
   viewport?: {
-    once?: boolean;
-    margin?: string;
-  };
-  staggerDelay?: number;
-  initialDelay?: number;
+    once?: boolean
+    margin?: string
+  }
+  staggerDelay?: number
+  initialDelay?: number
 }
 ```
 
@@ -634,15 +647,15 @@ Defines animation settings for the `ReviewSectionReviews`.
 
 ```typescript
 interface ReviewSectionReviewsAnimationConfig {
-  container?: Variants;
-  item?: Variants;
-  disabled?: boolean;
+  container?: Variants
+  item?: Variants
+  disabled?: boolean
   viewport?: {
-    once?: boolean;
-    margin?: string;
-  };
-  staggerDelay?: number;
-  initialDelay?: number;
+    once?: boolean
+    margin?: string
+  }
+  staggerDelay?: number
+  initialDelay?: number
 }
 ```
 
@@ -709,13 +722,14 @@ Customize the review components further using utility classes or by extending th
 Override default animations by providing custom configurations to `ReviewSection` and `ReviewSectionReviews`.
 
 ```tsx showLineNumbers title="components/CustomAnimatedReviewSection.tsx"
-import React from "react";
+import React from "react"
+
 import {
+  PKSReviewCard,
   ReviewSection,
   ReviewSectionHeader,
   ReviewSectionReviews,
-  PKSReviewCard,
-} from "@/components/ui/reviews";
+} from "@/components/ui/reviews"
 
 const customAnimationConfig = {
   container: {
@@ -726,7 +740,7 @@ const customAnimationConfig = {
     initial: { x: -100 },
     animate: { x: 0, transition: { type: "spring", stiffness: 50 } },
   },
-};
+}
 
 export function CustomAnimatedReviewSection() {
   return (
@@ -739,7 +753,7 @@ export function CustomAnimatedReviewSection() {
         {/* More review cards */}
       </ReviewSectionReviews>
     </ReviewSection>
-  );
+  )
 }
 ```
 
@@ -748,16 +762,17 @@ export function CustomAnimatedReviewSection() {
 Use state management libraries like Redux or Zustand in conjunction with the review components for more complex state scenarios.
 
 ```tsx showLineNumbers title="components/ReduxReviewSection.tsx"
-import React from "react";
-import { useSelector } from "react-redux";
+import React from "react"
+import { useSelector } from "react-redux"
+
 import {
+  PKSReviewCard,
   ReviewSection,
   ReviewSectionReviews,
-  PKSReviewCard,
-} from "@/components/ui/reviews";
+} from "@/components/ui/reviews"
 
 export function ReduxReviewSection() {
-  const reviews = useSelector((state) => state.reviews.list);
+  const reviews = useSelector((state) => state.reviews.list)
 
   return (
     <ReviewSection>
@@ -769,7 +784,7 @@ export function ReduxReviewSection() {
         ))}
       </ReviewSectionReviews>
     </ReviewSection>
-  );
+  )
 }
 ```
 

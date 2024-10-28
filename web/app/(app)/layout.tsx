@@ -1,5 +1,5 @@
-import AppSidebar from "@/components/complex/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import AppSidebar from "@/components/complex/AppSidebar"
 
 export default function Layout({
   children,
@@ -12,5 +12,5 @@ export default function Layout({
         {children}
       </main>
     </SidebarProvider>
-  );
+  )
 }

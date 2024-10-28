@@ -1,43 +1,44 @@
-"use client";
+"use client"
 
+import { useEffect, useState } from "react"
+import Image from "next/image"
+
+import siteConfig from "@/config/site"
+import { cn } from "@/lib/utils"
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import siteConfig from "@/config/site";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+} from "@/components/ui/sidebar"
 
 const AppSidebarHeader = () => {
-  const [imageSize, setImageSize] = useState(64);
+  const [imageSize, setImageSize] = useState(64)
 
   const getImageSizeBasedOnDevice = () => {
     if (typeof window !== "undefined") {
-      if (window.innerWidth < 640) return 16; // Smaller size for mobile devices
-      if (window.innerWidth < 1024) return 40; // Medium size for tablets
+      if (window.innerWidth < 640) return 16 // Smaller size for mobile devices
+      if (window.innerWidth < 1024) return 40 // Medium size for tablets
     }
-    return 40; // Default/larger size for desktops
-  };
+    return 40 // Default/larger size for desktops
+  }
 
   useEffect(() => {
     const handleResize = () => {
-      setImageSize(getImageSizeBasedOnDevice());
-    };
+      setImageSize(getImageSizeBasedOnDevice())
+    }
 
     // Set initial size
-    handleResize();
+    handleResize()
 
     // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize)
 
     // Clean up event listener on component unmount
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
-  const { open } = useSidebar();
+  const { open } = useSidebar()
 
   return (
     <SidebarMenu>
@@ -63,9 +64,9 @@ const AppSidebarHeader = () => {
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
-};
+  )
+}
 
-export default AppSidebarHeader;
+export default AppSidebarHeader
 
-AppSidebarHeader.displayName = "AppSidebarHeader";
+AppSidebarHeader.displayName = "AppSidebarHeader"

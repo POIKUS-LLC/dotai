@@ -1,6 +1,7 @@
-import { Home } from "lucide-react";
-import { Suspense } from "react";
-import AppSidebar from "./root";
+import { Suspense } from "react"
+import { Home } from "lucide-react"
+
+import AppSidebar from "./root"
 
 const AppSidebarWrapper = () => {
   return (
@@ -15,9 +16,9 @@ const AppSidebarWrapper = () => {
         ]}
       />
     </Suspense>
-  );
-};
+  )
+}
 
-AppSidebarWrapper.displayName = "AppSidebarWrapper";
+AppSidebarWrapper.displayName = "AppSidebarWrapper"
 
-export default AppSidebarWrapper;
+export default AppSidebarWrapper
