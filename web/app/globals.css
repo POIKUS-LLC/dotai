@@ -55,6 +55,24 @@ body {
     --review-muted-foreground: 0 0% 45.1%;
     --review-rating-active: 45 93% 47%;
     --review-rating-inactive: 0 0% 96.1%;
+    /* Pricing Component Theme */
+    --pricing-background: 0 0% 100%;
+    --pricing-foreground: 0 0% 3.9%;
+    --pricing-border: 0 0% 89.8%;
+    --pricing-muted: 0 0% 96.1%;
+    --pricing-muted-foreground: 0 0% 45.1%;
+    --pricing-highlight-background: 0 0% 100%;
+    --pricing-highlight-foreground: 0 0% 3.9%;
+    --pricing-highlight-border: 259 63.3% 59.4%;
+    --pricing-highlight-button-background: 259 63.3% 59.4%;
+    --pricing-highlight-button-foreground: 0 0% 100%;
+    --pricing-highlight-button-hover: 259 63.3% 38%;
+    --pricing-highlight-badge-background: 259 63.3% 72%;
+    --pricing-highlight-badge-foreground: 0 0% 100%;
+    --pricing-feature-active: 0 0% 3.9%;
+    --pricing-feature-inactive: 0 0% 96.1%;
+    --pricing-highlight-feature-active: 259 63.3% 59.4%;
+    --pricing-highlight-feature-inactive: 259 63.3% 72%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -97,6 +115,24 @@ body {
     --review-muted-foreground: 0 0% 63.9%;
     --review-rating-active: 45 93% 47%; /* amber-400 equivalent */
     --review-rating-inactive: 0 0% 14.9%;
+    /* Pricing Component Dark Theme */
+    --pricing-background: 0 0% 3.9%;
+    --pricing-foreground: 0 0% 98%;
+    --pricing-border: 0 0% 14.9%;
+    --pricing-muted: 0 0% 14.9%;
+    --pricing-muted-foreground: 0 0% 63.9%;
+    --pricing-highlight-background: 217 91% 60%;
+    --pricing-highlight-foreground: 0 0% 100%;
+    --pricing-highlight-border: 217 91% 60%;
+    --pricing-highlight-button-background: 0 0% 100%;
+    --pricing-highlight-button-foreground: 217 91% 60%;
+    --pricing-highlight-button-hover: 0 0% 95%;
+    --pricing-highlight-badge-background: 0 0% 100%;
+    --pricing-highlight-badge-foreground: 217 91% 60%;
+    --pricing-highlight-feature-active: 0 0% 100%;
+    --pricing-highlight-feature-inactive: 0 0% 3.9%;
+    --pricing-feature-active: 0 0% 98%;
+    --pricing-feature-inactive: 0 0% 96.1%;
   }
 }
 

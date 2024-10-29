@@ -71,6 +71,32 @@ const config: Config = {
             inactive: "hsl(var(--review-rating-inactive))",
           },
         },
+        pricing: {
+          DEFAULT: "hsl(var(--pricing-background))",
+          foreground: "hsl(var(--pricing-foreground))",
+          border: "hsl(var(--pricing-border))",
+          muted: "hsl(var(--pricing-muted))",
+          "muted-foreground": "hsl(var(--pricing-muted-foreground))",
+          "feature-active": "hsl(var(--pricing-feature-active))",
+          "feature-inactive": "hsl(var(--pricing-feature-inactive))",
+          "highlight-feature-active":
+            "hsl(var(--pricing-highlight-feature-active))",
+          "highlight-feature-inactive":
+            "hsl(var(--pricing-highlight-feature-inactive))",
+          "highlight-background": "hsl(var(--pricing-highlight-background))",
+          "highlight-foreground": "hsl(var(--pricing-highlight-foreground))",
+          "highlight-border": "hsl(var(--pricing-highlight-border))",
+          "highlight-button-background":
+            "hsl(var(--pricing-highlight-button-background))",
+          "highlight-button-foreground":
+            "hsl(var(--pricing-highlight-button-foreground))",
+          "highlight-button-hover":
+            "hsl(var(--pricing-highlight-button-hover))",
+          "highlight-badge-background":
+            "hsl(var(--pricing-highlight-badge-background))",
+          "highlight-badge-foreground":
+            "hsl(var(--pricing-highlight-badge-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
