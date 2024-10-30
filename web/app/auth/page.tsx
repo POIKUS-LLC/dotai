@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 import Testimonials from "@/components/complex/Testimonials"
 import { mockTestimonials } from "@/components/complex/Testimonials/testimonial-model"
 

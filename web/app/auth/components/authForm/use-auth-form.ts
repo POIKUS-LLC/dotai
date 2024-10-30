@@ -24,6 +24,7 @@ export const useAuthForm = ({ onSuccess }: { onSuccess: () => void }) => {
     setIsLoading(true)
     setError(null)
     try {
+      console.log(values) // TODO: Remove this
       // Simulate API call
       await new Promise((resolve, reject) => {
         setTimeout(() => {

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
+import { UseFormReturn } from "react-hook-form"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -22,6 +23,11 @@ import ResponsiveDialog from "@/components/complex/ResponsiveDialog"
 
 import AuthOTPForm from "../authOTPForm/auth-OTP-form"
 import { useAuthForm } from "./use-auth-form"
+
+interface AuthFormData {
+  email: string
+  rememberMe: boolean
+}
 
 const AuthForm = () => {
   const [showOTP, setShowOTP] = useState(false)
@@ -44,7 +50,11 @@ const AuthForm = () => {
       />
       <AuthFormHeader />
       {error && <ErrorAlert message={error} />}
-      <AuthFormFields form={form} isLoading={isLoading} onSubmit={onSubmit} />
+      <AuthFormFields
+        form={form as UseFormReturn<AuthFormData>}
+        isLoading={isLoading}
+        onSubmit={onSubmit}
+      />
       <AuthFormFooter />
     </div>
   )
@@ -89,9 +99,9 @@ const AuthFormFields = ({
   isLoading,
   onSubmit,
 }: {
-  form: any
+  form: UseFormReturn<AuthFormData>
   isLoading: boolean
-  onSubmit: (data: any) => void
+  onSubmit: (data: AuthFormData) => void
 }) => (
   <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowLeft, ArrowRight } from "lucide-react"
@@ -16,12 +16,17 @@ const Testimonials = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(1)
-  const [_cornerRadius, setCornerRadius] = useState(cornerRadius || "75px")
+  const cornerRadiusValue = cornerRadius || "75px"
+
+  const handleNext = useCallback(() => {
+    setDirection(1)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+  }, [testimonials.length])
 
   useEffect(() => {
     const interval = setInterval(handleNext, 5000)
     return () => clearInterval(interval)
-  }, [currentIndex])
+  }, [handleNext])
 
   const currentTestimonial = testimonials[currentIndex]
 
@@ -30,11 +35,6 @@ const Testimonials = ({
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
     )
-  }
-
-  const handleNext = () => {
-    setDirection(1)
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -84,8 +84,8 @@ const Testimonials = ({
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${currentTestimonial.background})`,
-              borderTopLeftRadius: _cornerRadius,
-              borderBottomLeftRadius: _cornerRadius,
+              borderTopLeftRadius: cornerRadiusValue,
+              borderBottomLeftRadius: cornerRadiusValue,
             }}
           />
         </motion.div>
@@ -140,8 +140,8 @@ const Testimonials = ({
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           style={{
-            borderBottomLeftRadius: _cornerRadius,
-            borderTopLeftRadius: _cornerRadius,
+            borderBottomLeftRadius: cornerRadiusValue,
+            borderTopLeftRadius: cornerRadiusValue,
           }}
         >
           <motion.div

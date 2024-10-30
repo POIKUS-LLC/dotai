@@ -1,7 +1,6 @@
 "use client"
 
-import * as React from "react"
-import { Check, Info } from "lucide-react"
+import { Info } from "lucide-react"
 
 import {
   PKSPricingCard,

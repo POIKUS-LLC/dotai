@@ -27,6 +27,7 @@ const useOTPForm = (onVerificationSuccess: () => void, otpLength: number) => {
     setError(null)
 
     try {
+      console.log(data) // TODO: Remove this
       // Mock API call
       await new Promise<void>((resolve, reject) => {
         setTimeout(() => {
