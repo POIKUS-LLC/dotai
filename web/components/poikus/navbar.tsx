@@ -4,6 +4,7 @@ import * as React from "react"
 import { cva } from "class-variance-authority"
 import { Menu } from "lucide-react"
 
+import siteConfig from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,6 +18,8 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
+
+import { NavigationContent } from "./navigation"
 
 // -------------------- Type Definitions -------------------- //
 
@@ -387,19 +390,27 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
           )}
 
           <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetContent
-              side="right"
-              className="w-full max-w-xs p-0 flex flex-col"
-            >
-              <div className="flex h-16 items-center justify-between border-b px-4">
+            <SheetContent side="right" className="w-[300px] p-0 flex flex-col">
+              <div className="flex h-16 items-center px-4 border-b">
                 {brand}
               </div>
               <ScrollArea className="flex-1">
-                <div className="flex flex-col gap-4 p-4">{navigationItems}</div>
+                <div className="flex flex-col py-2">
+                  {siteConfig.navigation.mainNav.map((item) => (
+                    <NavigationContent
+                      key={item.title}
+                      item={item}
+                      layoutConfig={siteConfig.navigationLayout[item.title]}
+                      isMobile
+                    />
+                  ))}
+                </div>
               </ScrollArea>
-              <div className="border-t p-4 mt-auto">
-                <div className="flex flex-col gap-2">{actions}</div>
-              </div>
+              {actions && (
+                <div className="border-t p-4">
+                  <div className="flex flex-col gap-2">{actions}</div>
+                </div>
+              )}
             </SheetContent>
           </Sheet>
         </NavbarContext.Provider>
