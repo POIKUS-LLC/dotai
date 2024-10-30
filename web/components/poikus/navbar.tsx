@@ -60,9 +60,10 @@ const navbarVariants = cva(
   {
     variants: {
       variant: {
-        default: "top-0 left-0 right-0 bg-white border-b w-full",
+        default:
+          "top-0 left-0 right-0 bg-navbar-background border-b border-navbar-border w-full",
         glass:
-          "top-4 left-0 right-0 mx-auto w-fit bg-white/80 backdrop-blur-md border border-white/20 shadow-lg rounded-full",
+          "top-4 left-0 right-0 mx-auto w-fit bg-navbar-glass-background backdrop-blur-md border border-navbar-glass-border shadow-lg rounded-full",
       },
       size: {
         default: "h-16 px-4",
@@ -81,8 +82,9 @@ const navbarItemVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-foreground hover:bg-accent px-4 py-2",
-        compact: "text-foreground/80 hover:text-foreground px-3",
+        default:
+          "text-navbar-foreground hover:bg-navbar-accent hover:text-navbar-accent-foreground px-4 py-2",
+        compact: "text-navbar-muted hover:text-navbar-foreground px-3",
       },
     },
     defaultVariants: {
@@ -147,9 +149,12 @@ const PKSNavbar = React.forwardRef<
           </div>
         </motion.div>
 
-        <SheetContent side="left" className="w-full max-w-[400px] p-0">
+        <SheetContent
+          side="left"
+          className="w-full max-w-[400px] p-0 bg-navbar-background border-navbar-border text-navbar-foreground"
+        >
           <div className="flex h-full flex-col">
-            <div className="border-b px-6 py-4">
+            <div className="border-b border-navbar-border px-6 py-4">
               {React.Children.map(children, (child) => {
                 if (
                   React.isValidElement(child) &&
@@ -161,7 +166,7 @@ const PKSNavbar = React.forwardRef<
               })}
             </div>
             <div className="flex-1 overflow-auto py-4">
-              <nav className="flex flex-col gap-1 px-2">
+              <nav className="flex flex-col gap-1 px-2 text-navbar-foreground">
                 {React.Children.map(children, (child) => {
                   if (
                     React.isValidElement(child) &&
@@ -310,7 +315,10 @@ const PKSNavbarSeparator = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn("h-6 w-px bg-border mx-2 hidden lg:block", className)}
+      className={cn(
+        "h-6 w-px bg-navbar-border mx-2 hidden lg:block",
+        className
+      )}
       {...props}
     />
   )
@@ -324,7 +332,7 @@ const PKSNavbarDropdownItem = React.forwardRef<
   <a
     ref={ref}
     className={cn(
-      "block select-none space-y-1 rounded-sm px-3 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+      "block select-none space-y-1 rounded-sm px-3 py-1.5 text-sm outline-none transition-colors hover:bg-navbar-accent hover:text-navbar-accent-foreground focus:bg-navbar-accent focus:text-navbar-accent-foreground",
       className
     )}
     {...props}

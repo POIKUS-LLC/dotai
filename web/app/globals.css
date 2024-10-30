@@ -73,6 +73,16 @@ body {
     --pricing-feature-inactive: 0 0% 96.1%;
     --pricing-highlight-feature-active: 259 63.3% 59.4%;
     --pricing-highlight-feature-inactive: 259 63.3% 72%;
+    /* Add Navbar Theme variables */
+    --navbar-background: 0 0% 100%;
+    --navbar-foreground: 240 10% 3.9%;
+    --navbar-muted: 240 3.8% 46.1%;
+    --navbar-muted-foreground: 240 5% 64.9%;
+    --navbar-accent: 240 4.8% 95.9%;
+    --navbar-accent-foreground: 240 5.9% 10%;
+    --navbar-border: 240 5.9% 90%;
+    --navbar-glass-background: 0 0% 100% 0.8;
+    --navbar-glass-border: 0 0% 100% 0.2;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -133,6 +143,16 @@ body {
     --pricing-highlight-feature-inactive: 0 0% 3.9%;
     --pricing-feature-active: 0 0% 98%;
     --pricing-feature-inactive: 0 0% 96.1%;
+    /* Add Navbar Dark Theme variables */
+    --navbar-background: 240 10% 3.9%;
+    --navbar-foreground: 0 0% 98%;
+    --navbar-muted: 240 5% 64.9%;
+    --navbar-muted-foreground: 240 5% 64.9%;
+    --navbar-accent: 240 3.7% 15.9%;
+    --navbar-accent-foreground: 0 0% 98%;
+    --navbar-border: 240 3.7% 15.9%;
+    --navbar-glass-background: 240 10% 3.9% 0.8;
+    --navbar-glass-border: 240 10% 3.9% 0.2;
   }
 }
 

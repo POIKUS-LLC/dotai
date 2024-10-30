@@ -100,6 +100,17 @@ const config: Config = {
           "highlight-badge-foreground":
             "hsl(var(--pricing-highlight-badge-foreground))",
         },
+        navbar: {
+          background: "hsl(var(--navbar-background))",
+          foreground: "hsl(var(--navbar-foreground))",
+          muted: "hsl(var(--navbar-muted))",
+          "muted-foreground": "hsl(var(--navbar-muted-foreground))",
+          accent: "hsl(var(--navbar-accent))",
+          "accent-foreground": "hsl(var(--navbar-accent-foreground))",
+          border: "hsl(var(--navbar-border))",
+          "glass-background": "hsla(var(--navbar-glass-background))",
+          "glass-border": "hsla(var(--navbar-glass-border))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
