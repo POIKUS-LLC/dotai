@@ -13,5 +13,5 @@ export default function DemoLayout({
     redirect("/")
   }
 
-  return <div className="container mx-auto py-8">{children}</div>
+  return <div>{children}</div>
 }
