@@ -71,13 +71,13 @@ const navbarVariants = cva(
           "fixed z-50",
           "top-10 left-1/2 -translate-x-1/2",
           "mx-auto max-w-fit min-w-[300px]",
-          "bg-background/95",
-          "dark:bg-background/90",
+          "bg-background/95 dark:bg-background/75",
           "backdrop-blur-md backdrop-saturate-150",
           "shadow-[0_8px_32px_rgba(0,0,0,0.12)]",
           "dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
           "rounded-full",
-          "bg-gradient-to-b from-white/50 to-white/20 dark:from-white/10 dark:to-transparent",
+          "bg-gradient-to-b from-white/50 to-white/20",
+          "dark:from-white/[0.15] dark:to-white/[0.05]",
           "rainbow-border",
           "!opacity-100",
           "transform-gpu",
@@ -134,18 +134,32 @@ const bottomActionsVariants = cva(
 // Update the bottom actions div className
 const bottomActionClassName = cn(
   "flex items-center gap-2",
-  "bg-background/60 dark:bg-background/40",
+  "bg-background/60 dark:bg-background/75",
   "backdrop-blur-md backdrop-saturate-150",
   "shadow-[0_8px_32px_rgba(0,0,0,0.08)]",
   "dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
   "bg-gradient-to-b from-white/50 to-white/20",
-  "dark:from-white/10 dark:to-transparent",
+  "dark:from-white/[0.15] dark:to-white/[0.05]",
   "px-4 py-2",
   "transition-all duration-200",
-  "hover:bg-background/70 dark:hover:bg-background/50",
+  "hover:bg-background/70 dark:hover:bg-background/80",
   "hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)]",
   "dark:hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
   "rainbow-border"
+)
+
+// Add this near the top with other style definitions
+export const navigationMenuTriggerStyle = cn(
+  [
+    "group inline-flex items-center justify-center",
+    "rounded-md text-sm font-medium",
+    "transition-colors duration-200",
+    "hover:bg-accent hover:text-accent-foreground",
+    "focus:bg-accent focus:text-accent-foreground focus:outline-none",
+    "disabled:pointer-events-none disabled:opacity-50",
+    "data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+    "antialiased",
+  ].join(" ")
 )
 
 // -------------------- Components -------------------- //
