@@ -64,16 +64,6 @@ function usePricingCard() {
   return context
 }
 
-function usePricingSection() {
-  const context = React.useContext(PricingSectionContext)
-  if (context === undefined) {
-    throw new Error(
-      "Pricing Section components must be used within a PricingSection"
-    )
-  }
-  return context
-}
-
 // -------------------- Variants -------------------- //
 
 const pricingCardVariants = cva(
@@ -145,6 +135,12 @@ const PKSPricingCard = React.forwardRef<
       }),
       [isHighlighted, isPopular]
     )
+    const variantChoosen =
+      variant === "default"
+        ? isHighlighted
+          ? "highlighted"
+          : "default"
+        : "default"
 
     return (
       <PricingCardContext.Provider value={value}>
@@ -152,7 +148,7 @@ const PKSPricingCard = React.forwardRef<
           ref={ref}
           className={cn(
             pricingCardVariants({
-              variant: isHighlighted ? "highlighted" : "default",
+              variant: variantChoosen,
               size,
               className,
             }),
@@ -184,19 +180,20 @@ const PKSPricingCardBadge = React.forwardRef<
   React.ComponentProps<"div"> & VariantProps<typeof pricingCardBadgeVariants>
 >(({ className, variant, children, ...props }, ref) => {
   const { isHighlighted } = usePricingCard()
-  console.log(
-    isHighlighted,
-    pricingCardBadgeVariants({
-      variant: isHighlighted ? "highlighted" : "default",
-      className,
-    })
-  )
+
+  const variantChoosen =
+    variant === "default"
+      ? isHighlighted
+        ? "highlighted"
+        : "default"
+      : "default"
+
   return (
     <div
       ref={ref}
       className={cn(
         pricingCardBadgeVariants({
-          variant: isHighlighted ? "highlighted" : "default",
+          variant: variantChoosen,
           className,
         })
       )}
