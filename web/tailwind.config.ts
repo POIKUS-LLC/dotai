@@ -13,6 +13,7 @@ const config: Config = {
         md: "12px",
       },
       colors: {
+        "rainbow-border": "rainbow-border 6s linear infinite",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -138,6 +139,25 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "rainbow-border": "rainbow-border 3s linear infinite",
+      },
+      utilities: {
+        ".backface-visibility-hidden": {
+          "backface-visibility": "hidden",
+          "-webkit-backface-visibility": "hidden",
+        },
+        ".perspective-1000": {
+          perspective: "1000px",
+          "-webkit-perspective": "1000px",
+        },
+        ".transform-gpu": {
+          transform: "translate3d(0,0,0)",
+          "-webkit-transform": "translate3d(0,0,0)",
+        },
+        ".translate-z-0": {
+          transform: "translateZ(0)",
+          "-webkit-transform": "translateZ(0)",
+        },
       },
     },
   },

@@ -164,3 +164,56 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.rainbow-border {
+  --border-size: 2px;
+  --border-radius: 9999px;
+  --gradient-color1: rgba(255, 0, 0, 0.35);
+  --gradient-color2: rgba(255, 165, 0, 0.35);
+  --gradient-color3: rgba(255, 255, 0, 0.35);
+  --gradient-color4: rgba(0, 255, 0, 0.35);
+  --gradient-color5: rgba(0, 165, 255, 0.35);
+  --gradient-color6: rgba(0, 0, 255, 0.35);
+
+  position: relative;
+  border-radius: var(--border-radius);
+}
+
+.rainbow-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius);
+  padding: var(--border-size);
+  background: conic-gradient(
+    from var(--angle),
+    var(--gradient-color1),
+    var(--gradient-color2),
+    var(--gradient-color3),
+    var(--gradient-color4),
+    var(--gradient-color5),
+    var(--gradient-color6),
+    var(--gradient-color1)
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  animation: rotate-border 3s linear infinite;
+}
