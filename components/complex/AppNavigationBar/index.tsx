@@ -50,11 +50,15 @@ const AppNavigationBrand = () => {
         src={siteConfig.companyLogo}
         alt="Logo"
         className="dark:hidden block"
+        width={50}
+        height={30}
       />
       <PKSImage
         src={siteConfig.companyLogoDark}
         alt="Logo"
         className="hidden dark:block"
+        width={50}
+        height={30}
       />
       <span className="text-lg font-bold">{siteConfig.companyName}</span>
     </div>
@@ -62,12 +66,7 @@ const AppNavigationBrand = () => {
 }
 
 const AppNavigationActions = () => {
-  return (
-    <>
-      <Button variant="ghost">Sign In</Button>
-      <Button>Get Started</Button>
-    </>
-  )
+  return <></>
 }
 
 const AppNavigationBar = ({ className }: { className?: string }) => {

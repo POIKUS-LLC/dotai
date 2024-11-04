@@ -64,7 +64,7 @@ const navigationConfig: NavigationConfig = {
 }
 
 const siteConfig = {
-  companyName: "POIKUS",
+  companyName: "DOTAI",
   companyLogo: "/images/logo.png",
   companyLogoDark: "/images/logo-dark.png",
   navigation: navigationConfig,

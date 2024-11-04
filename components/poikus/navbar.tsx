@@ -301,7 +301,7 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                 className,
               }),
               isCompact ? "invisible" : "visible",
-              "absolute top-0 left-0 right-0 fixed backdrop-blur-xl bg-white/10 z-50"
+              "absolute top-0 left-0 right-0 fixed backdrop-blur-xl z-50"
             )}
             suppressHydrationWarning
           >

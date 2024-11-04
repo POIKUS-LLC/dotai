@@ -37,7 +37,9 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class">
           <AppNavigationBar />
-          <main className="w-full">{children}</main>
+          <main className="w-full container mt-[80px] flex flex-col items-start px-8">
+            {children}
+          </main>
           <Toaster />
         </ThemeProvider>
       </body>
