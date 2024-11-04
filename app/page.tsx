@@ -1,6 +1,12 @@
 "use client"
 
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { ChevronDownIcon } from "@radix-ui/react-icons"
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
@@ -35,7 +41,7 @@ const itemVariants = {
   },
 }
 
-export default function Component() {
+function Component() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -440,6 +446,15 @@ export default function Component() {
   )
 }
 
+const HomePage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Component />
+    </Suspense>
+  )
+}
+
+export default HomePage
 // Utility function for debouncing
 function debounce<T extends (...args: any[]) => any>(
   func: T,

@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 
-import { CodeViewer } from "@/components/poikus/codeViewer/code-viewer"
+import CodeViewer from "@/components/poikus/codeViewer/code-viewer"
 
 const PreviewPage = () => {
   const searchParams = useSearchParams()
@@ -54,4 +54,13 @@ const useFetchFiles = (url: string) => {
 
   return { isLoading, files }
 }
-export default PreviewPage
+
+const PreviewPageWrapper = () => {
+  return (
+    <Suspense fallback={<CodeViewerSkeleton />}>
+      <PreviewPage />
+    </Suspense>
+  )
+}
+
+export default PreviewPageWrapper

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Download, Maximize2, Minimize2 } from "lucide-react"
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
@@ -24,7 +24,7 @@ interface CodeViewerProps {
   repoUrl: string
 }
 
-export function CodeViewer({ initialFiles = {}, repoUrl }: CodeViewerProps) {
+function CodeViewer({ initialFiles = {}, repoUrl }: CodeViewerProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [selectedFile, setSelectedFile] = useState<string | null>(null)
@@ -185,3 +185,17 @@ export function CodeViewer({ initialFiles = {}, repoUrl }: CodeViewerProps) {
     </div>
   )
 }
+
+const CodeViewerSkeleton = () => {
+  return <div className="h-full w-full bg-gray-100 animate-pulse" />
+}
+
+const CodeViewerWrapper = ({ initialFiles = {}, repoUrl }: CodeViewerProps) => {
+  return (
+    <Suspense fallback={<CodeViewerSkeleton />}>
+      <CodeViewer initialFiles={initialFiles} repoUrl={repoUrl} />
+    </Suspense>
+  )
+}
+
+export default CodeViewerWrapper
