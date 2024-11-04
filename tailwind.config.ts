@@ -135,11 +135,40 @@ const config: Config = {
             height: "0",
           },
         },
+        "rainbow-border": {
+          "0%, 100%": {
+            "border-image":
+              "linear-gradient(to right top, #6366f1, #8b5cf6, #d946ef) 1",
+          },
+          "25%": {
+            "border-image":
+              "linear-gradient(to right top, #d946ef, #6366f1, #8b5cf6) 1",
+          },
+          "50%": {
+            "border-image":
+              "linear-gradient(to right top, #8b5cf6, #d946ef, #6366f1) 1",
+          },
+          "75%": {
+            "border-image":
+              "linear-gradient(to right top, #6366f1, #d946ef, #8b5cf6) 1",
+          },
+        },
+        "gradient-xy": {
+          "0%, 100%": {
+            "background-size": "400% 400%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "rainbow-border": "rainbow-border 3s linear infinite",
+        "rainbow-border": "rainbow-border 6s linear infinite",
+        "gradient-xy": "gradient-xy 15s ease infinite",
       },
       utilities: {
         ".backface-visibility-hidden": {

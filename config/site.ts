@@ -53,73 +53,12 @@ const navigationLayout: NavigationLayout = {
 const navigationConfig: NavigationConfig = {
   mainNav: [
     {
-      title: "Products",
-      items: [
-        {
-          title: "What's New",
-          href: "/whats-new",
-          description: "Explore our latest features and improvements.",
-          icon: Sparkles,
-        },
-        {
-          title: "Components",
-          href: "/components",
-          description:
-            "Beautiful and accessible components built with Radix UI and Tailwind CSS.",
-          icon: Layers,
-        },
-        {
-          title: "Performance",
-          href: "/performance",
-          description: "Optimized for speed and reliability.",
-          icon: Gauge,
-        },
-      ],
+      title: "Homepage",
+      href: "/",
     },
     {
-      title: "Resources",
-      items: [
-        {
-          title: "Documentation",
-          href: "/docs",
-          description: "Learn how to integrate our tools with your app.",
-          icon: FileCode2,
-        },
-        {
-          title: "API Reference",
-          href: "/api",
-          description: "Detailed API documentation with examples.",
-          icon: Code2,
-        },
-        {
-          title: "Guides",
-          href: "/guides",
-          description: "Step-by-step guides to get started quickly.",
-          icon: BookOpen,
-        },
-        {
-          title: "Examples",
-          href: "/examples",
-          description: "Check out our collection of example projects.",
-          icon: Lightbulb,
-        },
-        {
-          title: "Support",
-          href: "/support",
-          description: "Get help from our support team.",
-          icon: LifeBuoy,
-        },
-        {
-          title: "Enterprise",
-          href: "/enterprise",
-          description: "Learn about our enterprise solutions.",
-          icon: Shield,
-        },
-      ],
-    },
-    {
-      title: "Pricing",
-      href: "#pricing",
+      title: "How to",
+      href: "/how-to",
     },
   ],
 }

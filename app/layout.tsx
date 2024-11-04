@@ -1,9 +1,13 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import { ThemeProvider } from "next-themes"
 
 import { Toaster } from "@/components/ui/toaster"
 
 import "./globals.css"
+
+import AppNavigationBar from "@/components/complex/AppNavigationBar"
+import { Navbar } from "@/components/poikus/navbar"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,12 +31,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen min-w-screen container mx-auto relative`}
       >
-        {children}
-        <Toaster />
+        <ThemeProvider attribute="class">
+          <AppNavigationBar />
+          <main className="w-full">{children}</main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

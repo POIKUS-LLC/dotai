@@ -1,4 +1,5 @@
 import siteConfig from "@/config/site"
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenuContent,
@@ -28,7 +29,10 @@ const NavigationItems = () => (
           </>
         ) : (
           <NavigationMenuLink
-            className={navigationMenuTriggerStyle()}
+            className={cn(
+              navigationMenuTriggerStyle(),
+              "font-semibold text-md"
+            )}
             href={item.href}
           >
             {item.title}
@@ -66,7 +70,7 @@ const AppNavigationActions = () => {
   )
 }
 
-const AppNavigationBar = () => {
+const AppNavigationBar = ({ className }: { className?: string }) => {
   return (
     <Navbar
       brand={<AppNavigationBrand />}

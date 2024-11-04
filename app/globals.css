@@ -10,6 +10,21 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .bg-gradient-light {
+    background: linear-gradient(
+      91deg,
+      #fff 32.88%,
+      hsla(0, 0%, 100%, 0.4) 99.12%
+    );
+  }
+
+  .bg-gradient-dark {
+    background: linear-gradient(
+      91deg,
+      rgba(255, 255, 255, 0.1) 32.88%,
+      rgba(255, 255, 255, 0.05) 99.12%
+    );
+  }
 }
 
 @layer base {

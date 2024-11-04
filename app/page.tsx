@@ -1,101 +1,161 @@
-import Image from "next/image"
+"use client"
 
-export default function Home() {
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
+
+import type { AIFolder } from "@/types/ai-folder"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { AIFolderCard } from "@/components/poikus/ai-folder-card"
+
+export default function Component() {
+  const router = useRouter()
+  const [folders, setFolders] = useState<AIFolder[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchFolders()
+  }, [])
+
+  const fetchFolders = async () => {
+    try {
+      const response = await fetch("/api/ai-folders")
+      const data = await response.json()
+      setFolders(data)
+    } catch (error) {
+      console.error("Error fetching folders:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handlePreviewClick = (folderId: string) => {
+    router.push(
+      `/preview?url=${folders.find((f) => f.id === folderId)?.previewUrl}`
+    )
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex items-center h-full justify-center">
+      <div className="relative flex h-full w-full flex-col overflow-hidden">
+        <main className="container mt-[80px] flex flex-col items-start px-8">
+          {/* Hero section */}
+          <section className="flex flex-col items-start justify-center gap-[18px] sm:gap-6 mb-16">
+            <Badge>Free, Powerful, and Customizable</Badge>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <LazyMotion features={domAnimation}>
+              <m.div
+                animate="kick"
+                className="flex flex-col gap-6"
+                exit="auto"
+                initial="auto"
+                transition={{
+                  duration: 0.25,
+                  ease: "easeInOut",
+                }}
+                variants={{
+                  auto: { width: "auto" },
+                  kick: { width: "auto" },
+                }}
+              >
+                <AnimatePresence mode="wait">
+                  <m.div
+                    animate={{ filter: "blur(0px)", opacity: 1, x: 0 }}
+                    className="text-start text-[clamp(40px,10vw,44px)] font-bold leading-[1.2] tracking-tighter sm:text-[64px]"
+                    initial={{
+                      filter: "blur(16px)",
+                      opacity: 0,
+                      x: 15 + 1 * 2,
+                    }}
+                    transition={{
+                      bounce: 0,
+                      delay: 0.01 * 10,
+                      duration: 0.8 + 0.1 * 8,
+                      type: "spring",
+                    }}
+                  >
+                    <div className="bg-gradient-to-r from-foreground/100 to-foreground/40 bg-clip-text text-transparent">
+                      Elevate Your Coding with <br />
+                      .ai folders
+                    </div>
+                  </m.div>
+
+                  <m.div
+                    animate={{ filter: "blur(0px)", opacity: 1, x: 0 }}
+                    className="text-start font-normal leading-7 text-default-500 sm:w-[466px] sm:text-[18px]"
+                    initial={{
+                      filter: "blur(16px)",
+                      opacity: 0,
+                      x: 15 + 1 * 3,
+                    }}
+                    transition={{
+                      bounce: 0,
+                      delay: 0.01 * 30,
+                      duration: 0.8 + 0.1 * 9,
+                      type: "spring",
+                    }}
+                  >
+                    Discover how customized AI configurations transform your
+                    development experience.
+                  </m.div>
+
+                  <m.div
+                    animate={{ filter: "blur(0px)", opacity: 1, x: 0 }}
+                    className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6"
+                    initial={{
+                      filter: "blur(16px)",
+                      opacity: 0,
+                      x: 15 + 1 * 4,
+                    }}
+                    transition={{
+                      bounce: 0,
+                      delay: 0.01 * 50,
+                      duration: 0.8 + 0.1 * 10,
+                      type: "spring",
+                    }}
+                  >
+                    <Button
+                      className="rounded-full"
+                      onClick={() => {
+                        router.push("/how-to")
+                      }}
+                    >
+                      How to use .ai folders
+                    </Button>
+                  </m.div>
+                </AnimatePresence>
+              </m.div>
+            </LazyMotion>
+          </section>
+
+          {/* Filter AI Folders */}
+
+          {/* AI Folders Grid */}
+          <section className="w-full mt-8">
+            <h2 className="text-2xl font-bold mb-6">Available .ai Folders</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <LazyMotion features={domAnimation}>
+                <AnimatePresence mode="wait">
+                  {folders.map((folder, index) => (
+                    <m.div
+                      key={folder.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <AIFolderCard
+                        folder={folder}
+                        onPreviewClick={handlePreviewClick}
+                      />
+                    </m.div>
+                  ))}
+                </AnimatePresence>
+              </LazyMotion>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   )
 }
