@@ -1,22 +1,129 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { ChevronDownIcon } from "@radix-ui/react-icons"
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
 
 import type { AIFolder } from "@/types/ai-folder"
+import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { AIFolderCard } from "@/components/poikus/ai-folder-card"
 
 export default function Component() {
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const [folders, setFolders] = useState<AIFolder[]>([])
   const [loading, setLoading] = useState(true)
+  const [uniquePlatforms, setUniquePlatforms] = useState<string[]>([])
+  const [uniqueLanguages, setUniqueLanguages] = useState<string[]>([])
+
+  // Initialize selected states from URL or all items
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([])
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+
+  // Update URL when filters change
+  const updateUrlParams = (platforms: string[], languages: string[]) => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    // Clear existing params
+    params.delete("noPlatform")
+    params.delete("noLanguages")
+    params.delete("platforms")
+    params.delete("languages")
+
+    // Add noPlatform flag if no platforms selected
+    if (platforms.length === 0) {
+      params.set("noPlatform", "true")
+    } else if (platforms.length < uniquePlatforms.length) {
+      // Only add selected platforms if not all are selected
+      params.set("platforms", platforms.join(","))
+    }
+
+    // Add noLanguages flag if no languages selected
+    if (languages.length === 0) {
+      params.set("noLanguages", "true")
+    } else if (languages.length < uniqueLanguages.length) {
+      // Only add selected languages if not all are selected
+      params.set("languages", languages.join(","))
+    }
+
+    // Update URL
+    const newUrl = params.toString()
+      ? `${pathname}?${params.toString()}`
+      : pathname
+    router.push(newUrl, { scroll: false })
+  }
 
   useEffect(() => {
     fetchFolders()
   }, [])
+
+  useEffect(() => {
+    if (folders.length > 0) {
+      // Get unique values
+      const platforms = Array.from(
+        new Set(folders.flatMap((folder) => folder.platform))
+      )
+      const languages = Array.from(
+        new Set(folders.flatMap((folder) => folder.language || []))
+      )
+
+      setUniquePlatforms(platforms)
+      setUniqueLanguages(languages)
+
+      // Check URL params for filter flags and selected items
+      const noPlatform = searchParams.get("noPlatform") === "true"
+      const noLanguages = searchParams.get("noLanguages") === "true"
+      const selectedPlatformsParam =
+        searchParams.get("platforms")?.split(",") || []
+      const selectedLanguagesParam =
+        searchParams.get("languages")?.split(",") || []
+
+      // Set initial selected values
+      if (noPlatform) {
+        setSelectedPlatforms([])
+      } else if (selectedPlatformsParam.length > 0) {
+        setSelectedPlatforms(selectedPlatformsParam)
+      } else {
+        setSelectedPlatforms(platforms)
+      }
+
+      if (noLanguages) {
+        setSelectedLanguages([])
+      } else if (selectedLanguagesParam.length > 0) {
+        setSelectedLanguages(selectedLanguagesParam)
+      } else {
+        setSelectedLanguages(languages)
+      }
+    }
+  }, [folders, searchParams])
+
+  const handlePlatformToggle = (platform: string) => {
+    const newSelected = selectedPlatforms.includes(platform)
+      ? selectedPlatforms.filter((p) => p !== platform)
+      : [...selectedPlatforms, platform]
+
+    setSelectedPlatforms(newSelected)
+    updateUrlParams(newSelected, selectedLanguages)
+  }
+
+  const handleLanguageToggle = (language: string) => {
+    const newSelected = selectedLanguages.includes(language)
+      ? selectedLanguages.filter((l) => l !== language)
+      : [...selectedLanguages, language]
+
+    setSelectedLanguages(newSelected)
+    updateUrlParams(selectedPlatforms, newSelected)
+  }
+
+  const handleClearFilters = () => {
+    setSelectedPlatforms(uniquePlatforms)
+    setSelectedLanguages(uniqueLanguages)
+    router.push(pathname, { scroll: false })
+  }
 
   const fetchFolders = async () => {
     try {
@@ -35,6 +142,26 @@ export default function Component() {
       `/preview?url=${folders.find((f) => f.id === folderId)?.previewUrl}`
     )
   }
+
+  // Filter folders based on selected platforms OR languages
+  const filteredFolders = folders.filter((folder) => {
+    // If nothing is selected, show no results
+    if (selectedPlatforms.length === 0 && selectedLanguages.length === 0) {
+      return false
+    }
+
+    // If platforms are selected, check platform match
+    if (selectedPlatforms.length > 0) {
+      return folder.platform.some((p) => selectedPlatforms.includes(p))
+    }
+
+    // If languages are selected, check language match
+    if (selectedLanguages.length > 0) {
+      return folder.language?.some((l) => selectedLanguages.includes(l))
+    }
+
+    return false
+  })
 
   return (
     <div className="flex items-center h-full justify-center">
@@ -130,26 +257,94 @@ export default function Component() {
           </section>
 
           {/* Filter AI Folders */}
+          <section className="w-full mt-8 flex flex-row justify-between gap-4">
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-bold mb-2">Platforms</h3>
+                <div className="flex flex-wrap gap-2">
+                  {uniquePlatforms.map((platform) => (
+                    <Button
+                      key={platform}
+                      variant={
+                        selectedPlatforms.includes(platform)
+                          ? "default"
+                          : "secondary"
+                      }
+                      className={cn(
+                        "rounded-full",
+                        selectedPlatforms.includes(platform)
+                          ? "bg-primary hover:bg-primary/90"
+                          : "hover:bg-secondary/80"
+                      )}
+                      onClick={() => handlePlatformToggle(platform)}
+                    >
+                      {platform}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-bold mb-2">Languages</h3>
+                <div className="flex flex-wrap gap-2">
+                  {uniqueLanguages.map((language) => (
+                    <Button
+                      key={language}
+                      variant={
+                        selectedLanguages.includes(language)
+                          ? "default"
+                          : "secondary"
+                      }
+                      className={cn(
+                        "rounded-full",
+                        selectedLanguages.includes(language)
+                          ? "bg-primary hover:bg-primary/90"
+                          : "hover:bg-secondary/80"
+                      )}
+                      onClick={() => handleLanguageToggle(language)}
+                    >
+                      {language}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {(selectedPlatforms.length < uniquePlatforms.length ||
+              selectedLanguages.length < uniqueLanguages.length) && (
+              <Button variant="destructive" onClick={handleClearFilters}>
+                Clear filters
+              </Button>
+            )}
+          </section>
 
           {/* AI Folders Grid */}
-          <section className="w-full mt-8">
+          <section className="w-full mt-10">
             <h2 className="text-2xl font-bold mb-6">Available .ai Folders</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
               <LazyMotion features={domAnimation}>
                 <AnimatePresence mode="wait">
-                  {folders.map((folder, index) => (
-                    <m.div
-                      key={folder.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <AIFolderCard
-                        folder={folder}
-                        onPreviewClick={handlePreviewClick}
-                      />
-                    </m.div>
-                  ))}
+                  {filteredFolders.length > 0 ? (
+                    filteredFolders.map((folder, index) => (
+                      <m.div
+                        key={folder.id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <AIFolderCard
+                          folder={folder}
+                          onPreviewClick={handlePreviewClick}
+                        />
+                      </m.div>
+                    ))
+                  ) : (
+                    <div className="col-span-2 flex items-center justify-center h-[250px]">
+                      <p className="text-muted-foreground">
+                        No folders match the selected filters
+                      </p>
+                    </div>
+                  )}
                 </AnimatePresence>
               </LazyMotion>
             </div>
